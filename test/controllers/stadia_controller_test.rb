@@ -2,7 +2,7 @@ require "test_helper"
 
 class StadiaControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @stadium = stadia(:one)
+    @stadium = stadia(:skydome)
   end
 
   test "should get index" do
@@ -38,11 +38,9 @@ class StadiaControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to stadium_url(@stadium)
   end
 
-  test "should destroy stadium" do
-    assert_difference('Stadium.count', -1) do
+  test "cant destroy stadium with games" do
+    assert_raises(ActiveRecord::DeleteRestrictionError) do
       delete stadium_url(@stadium)
     end
-
-    assert_redirected_to stadia_url
   end
 end

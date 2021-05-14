@@ -2,7 +2,7 @@ require "test_helper"
 
 class TeamsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @team = teams(:one)
+    @team = teams(:toronto)
   end
 
   test "should get index" do
@@ -38,9 +38,16 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to team_url(@team)
   end
 
-  test "should destroy team" do
-    assert_difference('Team.count', -1) do
+  test "cant destroy team with games" do
+    assert_raises(ActiveRecord::DeleteRestrictionError) do
       delete team_url(@team)
+    end
+  end
+
+  test "can only destroy team that doesn't have games" do
+    team = Team.create(name: 'No games team')
+    assert_difference('Team.count', -1) do
+      delete team_url(team)
     end
 
     assert_redirected_to teams_url

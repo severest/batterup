@@ -3,9 +3,13 @@
 one:
   start_time: 2021-05-13 21:59:19
   end_time: 2021-05-13 21:59:19
-  stadium: one
+  stadium: skydome
+  away_team: yankees
+  home_team: toronto
 
 two:
   start_time: 2021-05-13 21:59:19
   end_time: 2021-05-13 21:59:19
-  stadium: two
+  stadium: skydome
+  away_team: yankees
+  home_team: toronto

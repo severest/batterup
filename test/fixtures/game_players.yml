@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  player: tellez
+  game: one
+  start_inning:
+  end_inning:
+  fielding_position: 3
+  batting_order_position: 4
+  jersey_number: 44
+
+two:
+  player: grichuk
+  game: one
+  start_inning:
+  end_inning:
+  fielding_position: 8
+  batting_order_position: 1
+  jersey_number: 15

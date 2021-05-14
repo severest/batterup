@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class TeamsTest < ApplicationSystemTestCase
   setup do
-    @team = teams(:one)
+    @team = teams(:toronto)
   end
 
   test "visiting the index" do
@@ -30,14 +30,5 @@ class TeamsTest < ApplicationSystemTestCase
 
     assert_text "Team was successfully updated"
     click_on "Back"
-  end
-
-  test "destroying a Team" do
-    visit teams_url
-    page.accept_confirm do
-      click_on "Destroy", match: :first
-    end
-
-    assert_text "Team was successfully destroyed"
   end
 end

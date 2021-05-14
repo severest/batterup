@@ -1,7 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
+toronto:
+  name: Toronto Blue Jays
 
-two:
-  name: MyString
+yankees:
+  name: New York Yankees

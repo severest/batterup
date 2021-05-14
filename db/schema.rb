@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_14_045919) do
+ActiveRecord::Schema.define(version: 2021_05_14_142552) do
+
+  create_table "game_players", charset: "utf8", force: :cascade do |t|
+    t.bigint "player_id", null: false
+    t.bigint "game_id", null: false
+    t.decimal "start_inning", precision: 2, scale: 1
+    t.decimal "end_inning", precision: 2, scale: 1
+    t.integer "fielding_position"
+    t.integer "batting_order_position"
+    t.integer "jersey_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_id"], name: "index_game_players_on_game_id"
+    t.index ["player_id"], name: "index_game_players_on_player_id"
+  end
 
   create_table "games", charset: "utf8", force: :cascade do |t|
     t.datetime "start_time"
@@ -23,6 +37,12 @@ ActiveRecord::Schema.define(version: 2021_05_14_045919) do
     t.index ["away_team_id"], name: "index_games_on_away_team_id"
     t.index ["home_team_id"], name: "index_games_on_home_team_id"
     t.index ["stadium_id"], name: "index_games_on_stadium_id"
+  end
+
+  create_table "players", charset: "utf8", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "stadia", charset: "utf8", force: :cascade do |t|
@@ -38,6 +58,8 @@ ActiveRecord::Schema.define(version: 2021_05_14_045919) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "game_players", "games"
+  add_foreign_key "game_players", "players"
   add_foreign_key "games", "stadia"
   add_foreign_key "games", "teams", column: "away_team_id"
   add_foreign_key "games", "teams", column: "home_team_id"

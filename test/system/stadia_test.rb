@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class StadiaTest < ApplicationSystemTestCase
   setup do
-    @stadium = stadia(:one)
+    @stadium = stadia(:skydome)
   end
 
   test "visiting the index" do
@@ -32,14 +32,5 @@ class StadiaTest < ApplicationSystemTestCase
 
     assert_text "Stadium was successfully updated"
     click_on "Back"
-  end
-
-  test "destroying a Stadium" do
-    visit stadia_url
-    page.accept_confirm do
-      click_on "Destroy", match: :first
-    end
-
-    assert_text "Stadium was successfully destroyed"
   end
 end
