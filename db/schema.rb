@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_16_002037) do
+ActiveRecord::Schema.define(version: 2021_05_16_015056) do
 
   create_table "at_bats", charset: "utf8", force: :cascade do |t|
     t.bigint "batter_id", null: false
@@ -23,6 +23,25 @@ ActiveRecord::Schema.define(version: 2021_05_16_002037) do
     t.index ["batter_id"], name: "index_at_bats_on_batter_id"
     t.index ["game_id"], name: "index_at_bats_on_game_id"
     t.index ["pitcher_id"], name: "index_at_bats_on_pitcher_id"
+  end
+
+  create_table "game_event_players", charset: "utf8", force: :cascade do |t|
+    t.bigint "game_event_id", null: false
+    t.bigint "game_player_id", null: false
+    t.integer "role", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_event_id"], name: "index_game_event_players_on_game_event_id"
+    t.index ["game_player_id"], name: "index_game_event_players_on_game_player_id"
+  end
+
+  create_table "game_events", charset: "utf8", force: :cascade do |t|
+    t.bigint "at_bat_id", null: false
+    t.string "type", null: false
+    t.text "meta"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["at_bat_id"], name: "index_game_events_on_at_bat_id"
   end
 
   create_table "game_players", charset: "utf8", force: :cascade do |t|
@@ -76,6 +95,9 @@ ActiveRecord::Schema.define(version: 2021_05_16_002037) do
   add_foreign_key "at_bats", "game_players", column: "batter_id"
   add_foreign_key "at_bats", "game_players", column: "pitcher_id"
   add_foreign_key "at_bats", "games"
+  add_foreign_key "game_event_players", "game_events"
+  add_foreign_key "game_event_players", "game_players"
+  add_foreign_key "game_events", "at_bats"
   add_foreign_key "game_players", "games"
   add_foreign_key "game_players", "players"
   add_foreign_key "game_players", "teams"

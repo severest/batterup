@@ -43,13 +43,4 @@ class GamePlayersTest < ApplicationSystemTestCase
     assert_text "Game player was successfully updated"
     click_on "Back"
   end
-
-  test "destroying a Game player" do
-    visit game_players_url
-    page.accept_confirm do
-      click_on "Destroy", match: :first
-    end
-
-    assert_text "Game player was successfully destroyed"
-  end
 end
