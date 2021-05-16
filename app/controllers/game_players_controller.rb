@@ -64,6 +64,6 @@ class GamePlayersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def game_player_params
-      params.require(:game_player).permit(:player_id, :game_id, :start_inning, :end_inning, :fielding_position, :batting_order_position, :jersey_number)
+      params.require(:game_player).permit(:player_id, :game_id, :team_id, :start_inning, :end_inning, :fielding_position, :batting_order_position, :jersey_number)
     end
 end

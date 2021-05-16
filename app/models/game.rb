@@ -4,4 +4,5 @@ class Game < ApplicationRecord
   belongs_to :home_team, class_name: 'Team', foreign_key: 'home_team_id'
   has_many :player_games, class_name: 'GamePlayer', dependent: :destroy
   has_many :players, through: :game_players
+  has_many :at_bats
 end

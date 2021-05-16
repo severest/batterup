@@ -10,11 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_14_142552) do
+ActiveRecord::Schema.define(version: 2021_05_16_002037) do
+
+  create_table "at_bats", charset: "utf8", force: :cascade do |t|
+    t.bigint "batter_id", null: false
+    t.bigint "pitcher_id", null: false
+    t.bigint "game_id", null: false
+    t.string "batter_side_of_plate", limit: 1, null: false
+    t.decimal "inning", precision: 2, scale: 1
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["batter_id"], name: "index_at_bats_on_batter_id"
+    t.index ["game_id"], name: "index_at_bats_on_game_id"
+    t.index ["pitcher_id"], name: "index_at_bats_on_pitcher_id"
+  end
 
   create_table "game_players", charset: "utf8", force: :cascade do |t|
     t.bigint "player_id", null: false
     t.bigint "game_id", null: false
+    t.bigint "team_id", null: false
     t.decimal "start_inning", precision: 2, scale: 1
     t.decimal "end_inning", precision: 2, scale: 1
     t.integer "fielding_position"
@@ -24,6 +38,7 @@ ActiveRecord::Schema.define(version: 2021_05_14_142552) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["game_id"], name: "index_game_players_on_game_id"
     t.index ["player_id"], name: "index_game_players_on_player_id"
+    t.index ["team_id"], name: "index_game_players_on_team_id"
   end
 
   create_table "games", charset: "utf8", force: :cascade do |t|
@@ -58,8 +73,12 @@ ActiveRecord::Schema.define(version: 2021_05_14_142552) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "at_bats", "game_players", column: "batter_id"
+  add_foreign_key "at_bats", "game_players", column: "pitcher_id"
+  add_foreign_key "at_bats", "games"
   add_foreign_key "game_players", "games"
   add_foreign_key "game_players", "players"
+  add_foreign_key "game_players", "teams"
   add_foreign_key "games", "stadia"
   add_foreign_key "games", "teams", column: "away_team_id"
   add_foreign_key "games", "teams", column: "home_team_id"

@@ -37,12 +37,4 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
     patch game_url(@game), params: { game: { end_time: @game.end_time, stadium_id: @game.stadium_id, start_time: @game.start_time, away_team_id: teams(:yankees).id, home_team_id: teams(:toronto).id } }
     assert_redirected_to game_url(@game)
   end
-
-  test "should destroy game" do
-    assert_difference('Game.count', -1) do
-      delete game_url(@game)
-    end
-
-    assert_redirected_to games_url
-  end
 end

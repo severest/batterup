@@ -3,7 +3,8 @@
 one:
   player: tellez
   game: one
-  start_inning:
+  team: toronto
+  start_inning: 1.0
   end_inning:
   fielding_position: 3
   batting_order_position: 4
@@ -12,8 +13,29 @@ one:
 two:
   player: grichuk
   game: one
-  start_inning:
+  team: toronto
+  start_inning: 1.0
   end_inning:
   fielding_position: 8
   batting_order_position: 1
   jersey_number: 15
+  
+three:
+  player: judge
+  game: one
+  team: yankees
+  start_inning: 1.0
+  end_inning:
+  fielding_position: 8
+  batting_order_position: 1
+  jersey_number: 99
+  
+four:
+  player: cole
+  game: one
+  team: yankees
+  start_inning: 1.0
+  end_inning:
+  fielding_position: 1
+  batting_order_position: 
+  jersey_number: 45
