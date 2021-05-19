@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  team: toronto
+  player: tellez
+  effective_start:
+  effective_stop:
+
+two:
+  team: toronto
+  player: grichuk
+  effective_start:
+  effective_stop:
+  
+three:
+  team: yankees
+  player: judge
+  effective_start:
+  effective_stop:
+  
+four:
+  team: yankees
+  player: cole
+  effective_start:
+  effective_stop:

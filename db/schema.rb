@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_16_015056) do
+ActiveRecord::Schema.define(version: 2021_05_19_033125) do
+
+  create_table "active_roster_players", charset: "utf8", force: :cascade do |t|
+    t.bigint "team_id", null: false
+    t.bigint "player_id", null: false
+    t.datetime "effective_start"
+    t.datetime "effective_stop"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["player_id"], name: "index_active_roster_players_on_player_id"
+    t.index ["team_id"], name: "index_active_roster_players_on_team_id"
+  end
 
   create_table "at_bats", charset: "utf8", force: :cascade do |t|
     t.bigint "batter_id", null: false
@@ -92,6 +103,8 @@ ActiveRecord::Schema.define(version: 2021_05_16_015056) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "active_roster_players", "players"
+  add_foreign_key "active_roster_players", "teams"
   add_foreign_key "at_bats", "game_players", column: "batter_id"
   add_foreign_key "at_bats", "game_players", column: "pitcher_id"
   add_foreign_key "at_bats", "games"
