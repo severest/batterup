@@ -52,4 +52,18 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to teams_url
   end
+
+  test "teams list graphql query" do
+    query_string = <<-GRAPHQL
+    {
+      teams {
+        id 
+        name
+      }
+    }
+    GRAPHQL
+    post graphql_path, params: { query: query_string }
+    json_response = JSON.parse(@response.body)
+    assert_equal json_response["data"]["teams"].length, 2
+  end
 end
