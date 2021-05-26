@@ -59,11 +59,16 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
       teams {
         id 
         name
+        activePlayers {
+          id 
+          name
+        }
       }
     }
     GRAPHQL
     post graphql_path, params: { query: query_string }
     json_response = JSON.parse(@response.body)
     assert_equal json_response["data"]["teams"].length, 2
+    assert_equal json_response["data"]["teams"][0]["activePlayers"].length, 2
   end
 end

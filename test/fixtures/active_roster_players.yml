@@ -23,3 +23,9 @@ four:
   player: cole
   effective_start:
   effective_stop:
+
+five:
+  team: toronto
+  player: bautista
+  effective_start: 
+  effective_stop: 2020-01-01 00:00:00
