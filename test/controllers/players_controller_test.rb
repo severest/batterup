@@ -43,4 +43,38 @@ class PlayersControllerTest < ActionDispatch::IntegrationTest
       delete player_url(@player)
     end
   end
+
+  test "player search list graphql query" do
+    query_string = <<-GRAPHQL
+    query getPlayers($search: String) {
+      players(search: $search) {
+        id 
+        name
+      }
+    }
+    GRAPHQL
+    post graphql_path, params: { query: query_string }
+    json_response = JSON.parse(@response.body)
+    assert_equal json_response["data"]["players"].length, 5
+    post graphql_path, params: { query: query_string, variables: { search: 'jose' } }
+    json_response = JSON.parse(@response.body)
+    assert_equal json_response["data"]["players"].length, 1
+  end
+
+  test "player search by team list graphql query" do
+    query_string = <<-GRAPHQL
+    query getPlayers($search: String, $teamId: ID) {
+      players(search: $search, teamId: $teamId) {
+        id 
+        name
+      }
+    }
+    GRAPHQL
+    post graphql_path, params: { query: query_string, variables: { teamId: teams(:toronto).id } }
+    json_response = JSON.parse(@response.body)
+    assert_equal json_response["data"]["players"].length, 2
+    post graphql_path, params: { query: query_string, variables: { teamId: teams(:toronto).id, search: 'row' } }
+    json_response = JSON.parse(@response.body)
+    assert_equal json_response["data"]["players"].length, 1
+  end
 end

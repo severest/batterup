@@ -9,5 +9,6 @@ module Types
 
     field :teams, resolver: Queries::FetchTeams
     field :team, resolver: Queries::FetchTeam
+    field :players, resolver: Queries::FetchPlayers
   end
 end
