@@ -91,8 +91,8 @@ ActiveRecord::Schema.define(version: 2021_05_19_033125) do
   end
 
   create_table "stadia", charset: "utf8", force: :cascade do |t|
-    t.string "name"
-    t.string "address"
+    t.string "name", null: false
+    t.string "address", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
