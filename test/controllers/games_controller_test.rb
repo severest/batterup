@@ -37,4 +37,34 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
     patch game_url(@game), params: { game: { end_time: @game.end_time, stadium_id: @game.stadium_id, start_time: @game.start_time, away_team_id: teams(:yankees).id, home_team_id: teams(:toronto).id } }
     assert_redirected_to game_url(@game)
   end
+
+  test "add game" do
+    query_string = <<-GRAPHQL
+    mutation addGame($game: AddGameInput!) {
+      addGame(input: $game) {
+        game {
+          id
+        }
+      }
+    }
+    GRAPHQL
+    assert_difference 'Game.count', 1 do
+      graphql_query query_string, { game: { game: {awayTeamId: teams(:toronto).id, homeTeamId: teams(:yankees).id, stadiumId: stadia(:skydome).id}}}
+    end
+  end
+  
+  test "cant use add game with id" do
+    query_string = <<-GRAPHQL
+    mutation addGame($game: AddGameInput!) {
+      addGame(input: $game) {
+        game {
+          id
+        }
+      }
+    }
+    GRAPHQL
+    assert_raises GraphQLError do
+      graphql_query query_string, { game: { game: {id: games(:one).id, awayTeamId: teams(:toronto).id, homeTeamId: teams(:yankees).id, stadiumId: stadia(:skydome).id}}}
+    end
+  end
 end

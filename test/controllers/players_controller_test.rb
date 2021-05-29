@@ -53,11 +53,9 @@ class PlayersControllerTest < ActionDispatch::IntegrationTest
       }
     }
     GRAPHQL
-    post graphql_path, params: { query: query_string }
-    json_response = JSON.parse(@response.body)
+    json_response = graphql_query query_string
     assert_equal json_response["data"]["players"].length, 5
-    post graphql_path, params: { query: query_string, variables: { search: 'jose' } }
-    json_response = JSON.parse(@response.body)
+    json_response = graphql_query query_string, { search: 'jose' }
     assert_equal json_response["data"]["players"].length, 1
   end
 
@@ -70,11 +68,9 @@ class PlayersControllerTest < ActionDispatch::IntegrationTest
       }
     }
     GRAPHQL
-    post graphql_path, params: { query: query_string, variables: { teamId: teams(:toronto).id } }
-    json_response = JSON.parse(@response.body)
+    json_response = graphql_query query_string, { teamId: teams(:toronto).id }
     assert_equal json_response["data"]["players"].length, 2
-    post graphql_path, params: { query: query_string, variables: { teamId: teams(:toronto).id, search: 'row' } }
-    json_response = JSON.parse(@response.body)
+    json_response = graphql_query query_string, { teamId: teams(:toronto).id, search: 'row' }
     assert_equal json_response["data"]["players"].length, 1
   end
 end
