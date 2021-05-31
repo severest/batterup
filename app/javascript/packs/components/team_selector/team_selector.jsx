@@ -33,7 +33,6 @@ TeamSelector.propTypes = {
 
 TeamSelector.defaultProps = {
   filteredTeamIds: [],
-  value: null,
   onChange: () => {},
 }
 

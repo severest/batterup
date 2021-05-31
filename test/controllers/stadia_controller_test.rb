@@ -43,4 +43,18 @@ class StadiaControllerTest < ActionDispatch::IntegrationTest
       delete stadium_url(@stadium)
     end
   end
+
+  test "stadiums list graphql query" do
+    query_string = <<-GRAPHQL
+    {
+      stadiums {
+        id 
+        name
+        address
+      }
+    }
+    GRAPHQL
+    json_response = graphql_query query_string
+    assert_equal json_response["data"]["stadiums"].length, 2
+  end
 end
